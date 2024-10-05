@@ -1,0 +1,170 @@
+/* styles.css */
+
+/* General Styling */
+body {
+    font-family: 'Source Serif Pro', serif; /* Change to 'Source Serif Pro' */
+    background-color: #f6f7f8; /* Light gray background */
+    color: #333; /* Dark text for good contrast */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack header, container, and footer */
+    height: 100vh; /* Full height of viewport */
+    overflow: hidden; /* Hide scroll bars */
+}
+
+header {
+    background-color: #ffffff; /* White background for header */
+    padding: 5px 20px; /* Reduced padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 100%; /* Full width */
+}
+
+.header-content {
+    display: flex;
+    align-items: center; /* Center the logo vertically */
+}
+
+.logo {
+    width: 75%; /* Adjust logo size */
+    padding: 5%;
+}
+
+.container {
+    background-color: #ffffff; /* White background */
+    padding: 20px; /* Standard padding for inner content */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin: 20px auto; /* Center the container horizontally and add space around it */
+    position: relative; /* Position relative for z-index */
+    flex-grow: 1; /* Allow the container to grow and fill the available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically in the available space */
+    z-index: 1; /* Ensure it's above other elements */
+}
+
+/* Headings */
+h2 {
+    font-size: 20px; /* Adjusted size for better fit */
+    color: #444;
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+/* Ticket Count Display */
+#count {
+    font-size: 5em; /* Adjusted size for better fit */
+    font-weight: bold;
+    color: #007cba; /* Automattic's blue theme color */
+    padding: 5px 0; /* Reduced padding */
+}
+
+/* Buttons */
+button {
+    background-color: #007cba;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: none;
+}
+
+button:hover {
+    background-color: #005fa3; /* Darker blue on hover */
+}
+
+button:active {
+    background-color: #003f73; /* Even darker blue when pressed */
+}
+
+/* Disabled button (for example, when the timer is already running) */
+button:disabled {
+    background-color: #ccc; /* Disabled button */
+    cursor: not-allowed;
+}
+
+/* Layout Adjustments */
+.counter-display {
+    margin-bottom: 10px; /* Reduced space between the count and buttons */
+}
+
+/* Flexbox for counter buttons */
+.counter-buttons {
+    display: flex;
+    flex-direction: column; /* Arrange buttons in a column */
+    align-items: stretch; /* Stretch buttons to fit the container */
+    margin-bottom: 10px; /* Space below the buttons */
+}
+
+/* Group the increase and decrease buttons */
+.button-group {
+    display: flex; /* Use flexbox to align these buttons side by side */
+    justify-content: space-between; /* Space between the buttons */
+}
+
+.button-group button {
+    font-size: 1.5rem;
+    height: 2em;
+    width: 48%;
+    margin: 5px 0;
+}
+
+/* Timer Buttons */
+.timer-buttons {
+    display: flex;
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 10px;
+}
+
+/* Timer Reset Button Layout */
+.timer-buttons button {
+    width: 32%; /* Adjust button widths */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #ffffff; /* White background for footer */
+    padding: 5px 20px; /* Reduced padding */
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on top */
+    width: 100%; /* Full width */
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+    color: #555; /* Slightly lighter color for the footer text */
+}
+
+.copyright > p {
+    font-size: 0.7em;
+}
+
+/* Updated CSS for Status Circle */
+.status-circle {
+    display: inline-block;
+    width: 12px; /* Size of the circle */
+    height: 12px; /* Size of the circle */
+    border-radius: 50%; /* Make it round */
+    background-color: transparent; /* Start with transparent */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for shine effect */
+    margin-left: 5px; /* Space between text and circle */
+    transition: background-color 0.5s ease; /* Smooth transition for background color */
+}
+
+/* Green status */
+.green {
+    background-color: green; /* Change background to green */
+}
+
+/* Yellow status */
+.yellow {
+    background-color: yellow; /* Change background to yellow */
+}
+
+

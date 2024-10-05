@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <title>Counter and Timer App</title>
+    <audio id="beepSound" src="beep.mp3" preload="auto"></audio>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href=""><img src="https://automattic.com/wp-content/themes/a8c/automattic-2011/images/automattic-logo.svg" alt="Automattic Logo" class="logo"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Ticket Count</h2>
+        <div class="counter-display" id="count">0</div>
+        <div class="counter-buttons">
+            <div class="button-group">
+                <button id="increase">+</button>
+                <button id="decrease">-</button>
+            </div>
+            <button id="resetCounter">Reset Counter</button>
+        </div>
+        <h2>
+            <span>Timer <span id="timerStatus" class="status-circle"></span></span>
+        </h2>
+        <div id="timerDisplay">0:00</div>
+        <div class="timer-buttons">
+            <button id="startTimer">Play</button>
+            <button id="stopTimer">Stop</button>
+            <button id="resetTimer">Reset Timer</button>
+        </div>
+    </div>
+
+    <footer>
+        <section>
+            <div class="copyright">
+                <p>This app was made by Amin.PM for Automattic</p>
+            </div>
+        </section>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
