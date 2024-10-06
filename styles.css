@@ -1,10 +1,24 @@
 /* styles.css */
 
 /* General Styling */
+:root {
+    --bg-color-light: #f6f7f8; /* Light mode background */
+    --bg-color-dark: #4e4e4e; /* Dark mode background */
+    --text-color-light: #333; /* Light mode text color */
+    --text-color-dark: #eaeaea; /* Dark mode text color */
+    --container-bg-light: #ffffff; /* Light mode container background */
+    --container-bg-dark: #3a3a3a; /* Dark mode container background */
+    --button-bg: #007cba; /* Button background for both modes */
+    --button-hover-bg: #005fa3; /* Button hover background for both modes */
+    --button-active-bg: #003f73; /* Button active background for both modes */
+    --footer-bg-light: #ffffff; /* Light mode footer background */
+    --footer-bg-dark: #4e4e4e; /* Dark mode footer background */
+}
+
 body {
     font-family: 'Source Serif Pro', serif;
-    background-color: #f6f7f8;
-    color: #333;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,7 +28,7 @@ body {
 }
 
 header {
-    background-color: #ffffff;
+    background-color: var(--footer-bg-light);
     padding: 5px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
@@ -29,11 +43,7 @@ a {
     text-decoration: none;
 }
 
-a:link {
-    color: #444444;
-}
-
-a:visited {
+a:link, a:visited {
     color: #444444;
 }
 
@@ -50,7 +60,7 @@ a:visited {
 
 /* Main App Section Styling */
 .container {
-    background-color: #ffffff;
+    background-color: var(--container-bg-light);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -79,7 +89,7 @@ h2 {
 }
 
 button {
-    background-color: #007cba;
+    background-color: var(--button-bg);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -91,11 +101,11 @@ button {
 }
 
 button:hover {
-    background-color: #005fa3;
+    background-color: var(--button-hover-bg);
 }
 
 button:active {
-    background-color: #003f73;
+    background-color: var(--button-active-bg);
 }
 
 button:disabled {
@@ -154,7 +164,7 @@ button#resetCounter {
 /* Sound Settings Section Styling */
 .sound-settings {
     height: fit-content;
-    background-color: #fff;
+    background-color: var(--container-bg-light);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -185,7 +195,7 @@ button#resetCounter {
 }
 
 .sound-settings button {
-    background-color: #007cba;
+    background-color: var(--button-bg);
     color: #fff;
     padding: 10px;
     border: none;
@@ -195,7 +205,7 @@ button#resetCounter {
 }
 
 footer {
-    background-color: #ffffff;
+    background-color: var(--footer-bg-light);
     padding: 5px 20px;
     text-align: center;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -211,6 +221,28 @@ footer p {
     font-size: 0.7em;
 }
 
+/* Dark Mode Styles */
+body[data-theme='dark'] {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+}
+
+header[data-theme='dark'] {
+    background-color: var(--footer-bg-dark);
+}
+
+.container[data-theme='dark'] {
+    background-color: var(--container-bg-dark);
+}
+
+.sound-settings[data-theme='dark'] {
+    background-color: var(--container-bg-dark);
+}
+
+footer[data-theme='dark'] {
+    background-color: var(--footer-bg-dark);
+}
+
 @media only screen and (max-width: 468px) {
     .app-container {
         display: flex;
@@ -223,7 +255,7 @@ footer p {
     }
 
     .container {
-        background-color: #ffffff;
+        background-color: var(--container-bg-light);
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -244,7 +276,6 @@ footer p {
     }
 
     footer {
-        
         display: flex;
         flex-direction: row;
         align-items: flex-end;

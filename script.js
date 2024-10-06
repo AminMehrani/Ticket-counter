@@ -29,11 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Function to update the displayed timer
+// Function to update the displayed timer in hh:mm:ss format
 function updateTimerDisplay() {
-    const minutes = Math.floor(elapsedTime / 60);
-    const seconds = elapsedTime % 60;
-    document.getElementById("timerDisplay").textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    const hours = Math.floor(elapsedTime / 3600); // Calculate hours
+    const minutes = Math.floor((elapsedTime % 3600) / 60); // Calculate minutes
+    const seconds = elapsedTime % 60; // Calculate seconds
+
+    document.getElementById("timerDisplay").textContent = 
+        `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
 // Increase and decrease ticket count
@@ -131,4 +134,18 @@ document.getElementById("setSoundInterval").addEventListener("click", () => {
     } else {
         alert("Please enter a valid number of minutes.");
     }
+});
+
+// Toggle light/dark theme
+document.getElementById("themeToggle").addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme); // Save theme to local storage
+});
+
+// Load saved theme on page load
+document.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
 });
