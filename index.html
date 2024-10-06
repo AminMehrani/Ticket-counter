@@ -16,24 +16,35 @@
         </div>
     </header>
 
-    <div class="container">
-        <h2>Ticket Count</h2>
-        <div class="counter-display" id="count">0</div>
-        <div class="counter-buttons">
-            <div class="button-group">
-                <button id="increase">+</button>
-                <button id="decrease">-</button>
+    <div class="app-container">
+        <!-- Main App Section -->
+        <div class="container">
+            <h2>Ticket Count</h2>
+            <div class="counter-display" id="count">0</div>
+            <div class="counter-buttons">
+                <div class="button-group">
+                    <button id="increase">+</button>
+                    <button id="decrease">-</button>
+                </div>
+                <button id="resetCounter">Reset Counter</button>
             </div>
-            <button id="resetCounter">Reset Counter</button>
+            <h2>
+                <span>Timer <span id="timerStatus" class="status-circle"></span></span>
+            </h2>
+            <div id="timerDisplay">0:00</div>
+            <div class="timer-buttons">
+                <button id="startTimer">Play</button>
+                <button id="stopTimer">Stop</button>
+                <button id="resetTimer">Reset Timer</button>
+            </div>
         </div>
-        <h2>
-            <span>Timer <span id="timerStatus" class="status-circle"></span></span>
-        </h2>
-        <div id="timerDisplay">0:00</div>
-        <div class="timer-buttons">
-            <button id="startTimer">Play</button>
-            <button id="stopTimer">Stop</button>
-            <button id="resetTimer">Reset Timer</button>
+
+        <!-- Sound Settings Section -->
+        <div class="sound-settings">
+            <h2>Sound Settings</h2>
+            <label for="soundInterval">Set sound interval (minutes):</label>
+            <input type="number" id="soundInterval" min="1" placeholder="Enter minutes">
+            <button id="setInterval">Set Interval</button>
         </div>
     </div>
 

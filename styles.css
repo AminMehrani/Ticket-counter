@@ -2,67 +2,70 @@
 
 /* General Styling */
 body {
-    font-family: 'Source Serif Pro', serif; /* Change to 'Source Serif Pro' */
-    background-color: #f6f7f8; /* Light gray background */
-    color: #333; /* Dark text for good contrast */
+    font-family: 'Source Serif Pro', serif;
+    background-color: #f6f7f8;
+    color: #333;
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Stack header, container, and footer */
-    height: 100vh; /* Full height of viewport */
-    overflow: hidden; /* Hide scroll bars */
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
 header {
-    background-color: #ffffff; /* White background for header */
-    padding: 5px 20px; /* Reduced padding */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    width: 100%; /* Full width */
+    background-color: #ffffff;
+    padding: 5px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 .header-content {
     display: flex;
-    align-items: center; /* Center the logo vertically */
+    align-items: center;
 }
 
 .logo {
-    width: 75%; /* Adjust logo size */
+    width: 75%;
     padding: 5%;
 }
 
+.app-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* Main App Section Styling */
 .container {
-    background-color: #ffffff; /* White background */
-    padding: 20px; /* Standard padding for inner content */
+    background-color: #ffffff;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
     text-align: center;
-    margin: 20px auto; /* Center the container horizontally and add space around it */
-    position: relative; /* Position relative for z-index */
-    flex-grow: 1; /* Allow the container to grow and fill the available space */
+    margin: auto auto auto 30%;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically in the available space */
-    z-index: 1; /* Ensure it's above other elements */
+    justify-content: center;
+    position: relative;
 }
 
-/* Headings */
 h2 {
-    font-size: 20px; /* Adjusted size for better fit */
+    font-size: 20px;
     color: #444;
-    margin-bottom: 15px; /* Reduced margin */
+    margin-bottom: 15px;
 }
 
-/* Ticket Count Display */
 #count {
-    font-size: 5em; /* Adjusted size for better fit */
+    font-size: 5em;
     font-weight: bold;
-    color: #007cba; /* Automattic's blue theme color */
-    padding: 5px 0; /* Reduced padding */
+    color: #007cba;
+    padding: 5px 0;
 }
 
-/* Buttons */
 button {
     background-color: #007cba;
     color: #fff;
@@ -76,95 +79,165 @@ button {
 }
 
 button:hover {
-    background-color: #005fa3; /* Darker blue on hover */
+    background-color: #005fa3;
 }
 
 button:active {
-    background-color: #003f73; /* Even darker blue when pressed */
+    background-color: #003f73;
 }
 
-/* Disabled button (for example, when the timer is already running) */
 button:disabled {
-    background-color: #ccc; /* Disabled button */
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
-/* Layout Adjustments */
-.counter-display {
-    margin-bottom: 10px; /* Reduced space between the count and buttons */
+button#resetCounter {
+    width: 100%;
 }
 
-/* Flexbox for counter buttons */
 .counter-buttons {
-    display: flex;
-    flex-direction: column; /* Arrange buttons in a column */
-    align-items: stretch; /* Stretch buttons to fit the container */
-    margin-bottom: 10px; /* Space below the buttons */
+    margin-bottom: 10px;
 }
 
-/* Group the increase and decrease buttons */
 .button-group {
-    display: flex; /* Use flexbox to align these buttons side by side */
-    justify-content: space-between; /* Space between the buttons */
+    display: flex;
+    justify-content: space-between;
 }
 
 .button-group button {
     font-size: 1.5rem;
-    height: 2em;
     width: 48%;
     margin: 5px 0;
 }
 
-/* Timer Buttons */
 .timer-buttons {
     display: flex;
-    justify-content: space-between; /* Space between buttons */
+    justify-content: space-between;
     margin-top: 10px;
 }
 
-/* Timer Reset Button Layout */
 .timer-buttons button {
-    width: 32%; /* Adjust button widths */
+    width: 32%;
 }
 
-/* Footer Styling */
+.status-circle {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-left: 5px;
+    transition: background-color 0.5s ease;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: orangered;
+}
+
+/* Sound Settings Section Styling */
+.sound-settings {
+    height: fit-content;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    width: 100%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sound-settings h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sound-settings label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.sound-settings input {
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.sound-settings button {
+    background-color: #007cba;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 footer {
-    background-color: #ffffff; /* White background for footer */
-    padding: 5px 20px; /* Reduced padding */
+    background-color: #ffffff;
+    padding: 5px 20px;
     text-align: center;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow on top */
-    width: 100%; /* Full width */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
 footer p {
-    margin: 0; /* Remove default margin */
-    color: #555; /* Slightly lighter color for the footer text */
+    margin: 0;
+    color: #555;
 }
 
 .copyright > p {
     font-size: 0.7em;
 }
 
-/* Updated CSS for Status Circle */
-.status-circle {
-    display: inline-block;
-    width: 12px; /* Size of the circle */
-    height: 12px; /* Size of the circle */
-    border-radius: 50%; /* Make it round */
-    background-color: transparent; /* Start with transparent */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for shine effect */
-    margin-left: 5px; /* Space between text and circle */
-    transition: background-color 0.5s ease; /* Smooth transition for background color */
+@media only screen and (max-width: 768px) {
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        margin: auto;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+    }
+
+    .sound-settings {
+        margin: auto !important;
+        max-width: 100%;
+    }
+
+    footer {
+        
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        align-content: flex-end;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
 }
-
-/* Green status */
-.green {
-    background-color: green; /* Change background to green */
-}
-
-/* Yellow status */
-.yellow {
-    background-color: orangered; /* Change background to yellow */
-}
-
-
