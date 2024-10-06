@@ -3,6 +3,7 @@
 let count = 0;
 let timerInterval;
 let elapsedTime = 0; // Track elapsed time in seconds
+let soundElapsedTime = 0; // Track elapsed time for sound interval
 let timerRunning = false;
 let soundInterval = 15 * 60; // Default sound interval in seconds (15 minutes)
 
@@ -53,10 +54,11 @@ document.getElementById("resetCounter").addEventListener("click", () => {
     updateCounter();
 });
 
-// Update counter display
+// Update counter display and reset sound timer
 function updateCounter() {
     document.getElementById("count").textContent = count;
     localStorage.setItem("ticketCount", count);
+    soundElapsedTime = 0; // Reset only the sound timer
 }
 
 // Timer functionality
@@ -78,31 +80,35 @@ document.getElementById("stopTimer").addEventListener("click", () => {
 document.getElementById("resetTimer").addEventListener("click", resetTimer);
 
 function startTimer() {
-    timerRunning = true;
+    timerRunning = true; // Set the timer running state to true
     document.getElementById("timerStatus").classList.remove("orange"); // Remove orange when starting
+    document.getElementById("timerStatus").classList.add("green"); // Add green class
+
+    // Start the timer interval if it's not already running
     timerInterval = setInterval(() => {
         elapsedTime++;
+        soundElapsedTime++; // Increment sound elapsed time
         updateTimerDisplay();
 
         // Play sound when elapsed time matches the set interval
-        if (elapsedTime >= soundInterval) {
+        if (soundElapsedTime >= soundInterval) {
             playSound();
-            elapsedTime = 0; // Reset the elapsed time after sound plays
+            soundElapsedTime = 0; // Reset sound elapsed time after sound plays
         }
 
         localStorage.setItem("elapsedTime", elapsedTime);
     }, 1000);
-
-    document.getElementById("timerStatus").classList.add("green");
 }
 
 // Reset the timer and stop it
 function resetTimer() {
     clearInterval(timerInterval);
-    elapsedTime = 0;
+    elapsedTime = 0; // Reset only the main timer
+    soundElapsedTime = 0; // Reset sound timer
     updateTimerDisplay();
     localStorage.setItem("elapsedTime", elapsedTime);
     timerRunning = false;
+    timerInterval = null; // Reset timerInterval
     document.getElementById("timerStatus").classList.remove("green");
     document.getElementById("timerStatus").classList.add("orange"); // Set to orange when reset
 }
