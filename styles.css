@@ -33,6 +33,10 @@ a:link {
     color: #444444;
 }
 
+a:visited {
+    color: #444444;
+}
+
 .logo {
     width: 75%;
     padding: 5%;
@@ -53,7 +57,7 @@ a:link {
     max-width: 400px;
     width: 100%;
     text-align: center;
-    margin: auto auto auto 35%;
+    margin: auto auto auto 35vw;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
