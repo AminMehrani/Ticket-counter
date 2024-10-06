@@ -10,6 +10,7 @@ let soundInterval = 15 * 60; // Default sound interval in seconds (15 minutes)
 document.addEventListener("DOMContentLoaded", () => {
     const storedCount = localStorage.getItem("ticketCount");
     const storedTime = localStorage.getItem("elapsedTime");
+    const storedSoundInterval = localStorage.getItem("soundInterval");
 
     if (storedCount) {
         count = parseInt(storedCount, 10);
@@ -19,6 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (storedTime) {
         elapsedTime = parseInt(storedTime, 10);
         updateTimerDisplay();
+    }
+
+    if (storedSoundInterval) {
+        soundInterval = parseInt(storedSoundInterval, 10);
+        document.getElementById("soundIntervalInput").value = soundInterval / 60; // Set initial value in input
     }
 });
 
@@ -47,18 +53,10 @@ document.getElementById("resetCounter").addEventListener("click", () => {
     updateCounter();
 });
 
-// Update counter display and play sound
+// Update counter display
 function updateCounter() {
     document.getElementById("count").textContent = count;
     localStorage.setItem("ticketCount", count);
-    playSound();
-    resetTimer(); // Reset the timer whenever the counter is updated
-}
-
-// Play beep sound
-function playSound() {
-    const beepSound = document.getElementById("beepSound");
-    beepSound.play();
 }
 
 // Timer functionality
@@ -73,6 +71,7 @@ document.getElementById("stopTimer").addEventListener("click", () => {
         clearInterval(timerInterval);
         timerRunning = false;
         document.getElementById("timerStatus").classList.remove("green");
+        document.getElementById("timerStatus").classList.add("orange"); // Set to orange when stopped
     }
 });
 
@@ -80,6 +79,7 @@ document.getElementById("resetTimer").addEventListener("click", resetTimer);
 
 function startTimer() {
     timerRunning = true;
+    document.getElementById("timerStatus").classList.remove("orange"); // Remove orange when starting
     timerInterval = setInterval(() => {
         elapsedTime++;
         updateTimerDisplay();
@@ -104,14 +104,23 @@ function resetTimer() {
     localStorage.setItem("elapsedTime", elapsedTime);
     timerRunning = false;
     document.getElementById("timerStatus").classList.remove("green");
+    document.getElementById("timerStatus").classList.add("orange"); // Set to orange when reset
+}
+
+// Play beep sound
+function playSound() {
+    const beepSound = document.getElementById("beepSound");
+    beepSound.currentTime = 0; // Reset sound to the beginning
+    beepSound.play();
 }
 
 // Set custom sound interval
-document.getElementById("setInterval").addEventListener("click", () => {
-    const inputInterval = document.getElementById("soundInterval").value;
+document.getElementById("setSoundInterval").addEventListener("click", () => {
+    const inputInterval = document.getElementById("soundIntervalInput").value;
     const minutes = parseInt(inputInterval, 10);
     if (!isNaN(minutes) && minutes > 0) {
         soundInterval = minutes * 60; // Convert minutes to seconds
+        localStorage.setItem("soundInterval", soundInterval); // Save to local storage
         alert(`Sound will now play every ${minutes} minute(s).`);
     } else {
         alert("Please enter a valid number of minutes.");

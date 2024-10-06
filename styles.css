@@ -143,8 +143,8 @@ button#resetCounter {
     background-color: green;
 }
 
-.yellow {
-    background-color: orangered;
+.orange {
+    background-color: orange; /* Color when the timer is stopped */
 }
 
 /* Sound Settings Section Styling */
