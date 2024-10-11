@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (storedCount) {
         count = parseInt(storedCount, 10);
-        document.getElementById("count").textContent = count;
+        document.getElementById("count").value = count; // Update the input field with the stored count
     }
 
     if (storedTime) {
@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (storedSoundInterval) {
         soundInterval = parseInt(storedSoundInterval, 10);
-        document.getElementById("soundIntervalInput").value = soundInterval / 60; // Set initial value in input
+        document.getElementById("soundInterval").value = soundInterval / 60; // Set initial value in input
+        updateSoundTimerDisplay(soundInterval); // Initialize sound timer display with the stored sound interval
     }
 });
 
@@ -57,11 +58,23 @@ document.getElementById("resetCounter").addEventListener("click", () => {
     updateCounter();
 });
 
+// Update the counter display and local storage when the input changes
+document.getElementById("count").addEventListener("input", (event) => {
+    const newCount = parseInt(event.target.value, 10);
+    if (!isNaN(newCount) && newCount >= 0) {
+        count = newCount;
+        localStorage.setItem("ticketCount", count); // Store the updated count
+    } else {
+        event.target.value = count; // Reset to the current count if invalid
+    }
+});
+
 // Update counter display and reset sound timer
 function updateCounter() {
-    document.getElementById("count").textContent = count;
+    document.getElementById("count").value = count; // Update input field with the current count
     localStorage.setItem("ticketCount", count);
-    soundElapsedTime = 0; // Reset only the sound timer
+    soundElapsedTime = soundInterval; // Reset sound timer to the current interval
+    updateSoundTimerDisplay(soundElapsedTime); // Update the sound timer display
 }
 
 // Timer functionality
@@ -87,19 +100,24 @@ function startTimer() {
     document.getElementById("timerStatus").classList.remove("orange"); // Remove orange when starting
     document.getElementById("timerStatus").classList.add("green"); // Add green class
 
+    // Reset soundElapsedTime and update the sound timer display with the current interval
+    soundElapsedTime = soundInterval; // Start sound timer at the full sound interval
+    updateSoundTimerDisplay(soundElapsedTime); // Initialize sound timer with the current sound interval
+
     // Start the timer interval if it's not already running
     timerInterval = setInterval(() => {
         elapsedTime++;
-        soundElapsedTime++; // Increment sound elapsed time
+        soundElapsedTime--; // Decrement sound elapsed time
         updateTimerDisplay();
 
         // Play sound when elapsed time matches the set interval
-        if (soundElapsedTime >= soundInterval) {
+        if (soundElapsedTime <= 0) {
             playSound();
-            soundElapsedTime = 0; // Reset sound elapsed time after sound plays
+            soundElapsedTime = soundInterval; // Reset sound timer to full interval after sound plays
         }
 
         localStorage.setItem("elapsedTime", elapsedTime);
+        updateSoundTimerDisplay(soundElapsedTime); // Update sound timer display
     }, 1000);
 }
 
@@ -107,8 +125,9 @@ function startTimer() {
 function resetTimer() {
     clearInterval(timerInterval);
     elapsedTime = 0; // Reset only the main timer
-    soundElapsedTime = 0; // Reset sound timer
+    soundElapsedTime = soundInterval; // Reset sound timer to full interval
     updateTimerDisplay();
+    updateSoundTimerDisplay(soundElapsedTime); // Reset sound timer display to the full sound interval
     localStorage.setItem("elapsedTime", elapsedTime);
     timerRunning = false;
     timerInterval = null; // Reset timerInterval
@@ -119,33 +138,30 @@ function resetTimer() {
 // Play beep sound
 function playSound() {
     const beepSound = document.getElementById("beepSound");
-    beepSound.currentTime = 0; // Reset sound to the beginning
-    beepSound.play();
+    beepSound.currentTime = 0; // Reset sound to start
+    beepSound.play(); // Play sound
 }
 
-// Set custom sound interval
+// Set sound interval based on user input
 document.getElementById("setSoundInterval").addEventListener("click", () => {
-    const inputInterval = document.getElementById("soundIntervalInput").value;
-    const minutes = parseInt(inputInterval, 10);
-    if (!isNaN(minutes) && minutes > 0) {
-        soundInterval = minutes * 60; // Convert minutes to seconds
-        localStorage.setItem("soundInterval", soundInterval); // Save to local storage
-        alert(`Sound will now play every ${minutes} minute(s).`);
-    } else {
-        alert("Please enter a valid number of minutes.");
-    }
+    const soundIntervalInput = document.getElementById("soundInterval").value; // Use correct input ID
+    soundInterval = Math.max(parseInt(soundIntervalInput, 10), 1) * 60; // Convert minutes to seconds
+    localStorage.setItem("soundInterval", soundInterval); // Store sound interval in local storage
+    soundElapsedTime = soundInterval; // Reset sound elapsed time
+    updateSoundTimerDisplay(soundElapsedTime); // Start countdown with the new interval
+
+    // Update the sound timer to ensure it starts with the new interval
+    clearInterval(timerInterval); // Clear any existing timer
+    startTimer(); // Restart the timer with the new interval
 });
 
-// Toggle light/dark theme
-document.getElementById("themeToggle").addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const newTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme); // Save theme to local storage
-});
+// Function to update the sound timer display in MM:SS format
+function updateSoundTimerDisplay(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    document.getElementById("soundTimerDisplay").textContent =
+        `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+}
 
-// Load saved theme on page load
-document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-theme", savedTheme);
-});
+// Initialize sound timer display when loading the page
+updateSoundTimerDisplay(soundInterval);

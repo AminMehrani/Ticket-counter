@@ -16,11 +16,11 @@
         </div>
     </header>
 
-    <div class="app-container">
+    <div class="app-container app-main">
         <!-- Main App Section -->
         <div class="container">
             <h2>Ticket Count</h2>
-            <div class="counter-display" id="count">0</div>
+            <input type="number" id="count" value="0" min="0">
             <div class="counter-buttons">
                 <div class="button-group">
                     <button id="increase">+</button>
@@ -37,14 +37,31 @@
                 <button id="stopTimer">Stop</button>
                 <button id="resetTimer">Reset Timer</button>
             </div>
+            <div>
+                <p class="version">Version 1.5 <a href="https://github.com/AminMehrani/Ticket-counter">👉 Changelog</a></p>
+            </div>
         </div>
+
+        
 
         <!-- Sound Settings Section -->
 
-        <div class="sound-settings">
-            <label for="soundIntervalInput">Play sound every (minutes):</label>
-            <input type="number" id="soundIntervalInput" value="15" min="1">
-            <button id="setSoundInterval">Set Interval</button>
+        <div class="app-container">
+            <!-- Other sections remain unchanged -->
+            
+            <div class="sound-settings">
+                <label for="soundInterval">Sound Interval (minutes):</label>
+                <input type="number" id="soundInterval" value="1" min="1" step="1">
+                <button id="setSoundInterval">Set Interval</button>
+
+                <p>Next sound in: <span id="soundTimerDisplay">00:00</span></p>
+                
+            </div>
+        
+            <!-- Timer display section -->
+            
+        
+            <!-- Other sections remain unchanged -->
         </div>
 
 
