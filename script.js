@@ -155,12 +155,14 @@ document.getElementById("setSoundInterval").addEventListener("click", () => {
     startTimer(); // Restart the timer with the new interval
 });
 
-// Function to update the sound timer display in MM:SS format
+// Function to update the sound timer display in MM:SS format and update the title
 function updateSoundTimerDisplay(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    document.getElementById("soundTimerDisplay").textContent =
-        `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    const formattedTime = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    
+    document.getElementById("soundTimerDisplay").textContent = formattedTime;
+    document.title = `Timer: ${formattedTime}`; // Update the title with sound timer value
 }
 
 // Initialize sound timer display when loading the page

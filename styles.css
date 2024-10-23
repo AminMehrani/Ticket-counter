@@ -15,16 +15,18 @@
     --footer-bg-dark: #4e4e4e; /* Dark mode footer background */
 }
 
-body {
+html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+    margin: 0;
+    padding: 0;
     font-family: 'Source Serif Pro', serif;
     background-color: var(--bg-color-light);
     color: var(--text-color-light);
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
+    width: 100%;
 }
 
 header {
@@ -37,6 +39,12 @@ header {
 .header-content {
     display: flex;
     align-items: center;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
 }
 
 a {
@@ -54,20 +62,34 @@ a:link, a:visited {
 
 .app-container {
     display: flex;
-    flex-grow: 1;
     padding: 20px;
+ /* Ensure scrolling is enabled */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling for mobile */
+}
+
+.app-main {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.column {
+    width: 50%
+}
+
+.counter {
+    max-width: 400px;
 }
 
 /* Main App Section Styling */
 .container {
     background-color: var(--container-bg-light);
-    padding: 20px;
+    padding: 0px 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    width: 100%;
-    margin: 0px auto auto 37vw;
     text-align: center;
+    margin: auto auto auto 35%;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -100,6 +122,9 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     outline: none;
+    font-family: 'Source Serif Pro', serif;
+    width: 100%;
+    font-weight: 500;
 }
 
 button:hover {
@@ -116,7 +141,9 @@ button:disabled {
 }
 
 button#resetCounter {
+    font-family: 'Source Serif Pro', serif;
     width: 100%;
+    font-weight: 500;
 }
 
 .counter-buttons {
@@ -129,9 +156,14 @@ button#resetCounter {
 }
 
 .button-group button {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     width: 48%;
     margin: 5px 0;
+}
+
+div#timerDisplay {
+    font-size: 1.5em;
+    color: var(--button-bg);
 }
 
 .timer-buttons {
@@ -206,7 +238,12 @@ button#resetCounter {
     cursor: pointer;
 }
 
-
+.soundcol {
+    width: 240px;
+    right: 2%;
+    /* justify-content: end; */
+    position: relative;
+}
 
 footer {
     position: fixed;
@@ -277,7 +314,26 @@ input[type="number"]:focus {
     font-size: 0.5em;
 }
 
-@media only screen and (max-width: 468px) {
+#soundicon {
+    width: 25px;
+}
+
+#soundtimer {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+}
+/* Media Queries */
+@media only screen and (max-width: 480px) {
+
+    .column {
+        width: 90vw;
+    }
+
+    header {
+        max-width: 480px;
+    }
     .app-container {
         display: flex;
         flex-direction: column;
@@ -288,26 +344,24 @@ input[type="number"]:focus {
         margin-bottom: 10px;
     }
 
+    #count {
+
+    }
+
+
+
     .app-main {
-        overflow: scroll;
+        width: 100%;
+        position: relative;
         display: flex;
-        flex-direction: row-reverse;
+        flex-direction: column;
+        align-items: center;
     }
 
     .container {
-        background-color: var(--container-bg-light);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
+        margin-right: 10px !important;
         width: 70%;
-        text-align: center;
         margin: auto;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: relative;
     }
 
     .sound-settings {
@@ -320,8 +374,29 @@ input[type="number"]:focus {
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        align-content: flex-end;
         justify-content: center;
-        flex-wrap: nowrap;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .column {
+        width: 90vw;
+    }
+
+    .container {
+        width: 80%;
+        margin: auto;
+    }
+
+    .app-container {
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        padding: 10px;
     }
 }
